@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from OpenSSL import crypto
 import sys
 import json
