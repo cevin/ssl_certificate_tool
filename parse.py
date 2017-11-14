@@ -1,7 +1,7 @@
 from OpenSSL import crypto
 import sys
 import json
-
+import argparse
 
 
 
@@ -52,6 +52,13 @@ class CertTypeErrorException(BaseException):
     pass
 
 if __name__ == '__main__':
+
+    parser = argparse.ArgumentParser(description="parser ssl certificate request")
+    parser.add_argument('-c','--csr',required=True ,help="csr content", dest='csr')
+    args = parser.parse_args()
+
+    str = args.csr
+
     try:
         try:
             req = crypto.load_certificate_request(crypto.FILETYPE_PEM, str)
