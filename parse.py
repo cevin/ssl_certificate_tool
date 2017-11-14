@@ -57,7 +57,7 @@ if __name__ == '__main__':
     parser.add_argument('-c','--csr',required=True ,help="csr content", dest='csr')
     args = parser.parse_args()
 
-    str = args.csr
+    str = "\n".join(args.csr.split("\\n"))
 
     try:
         try:
