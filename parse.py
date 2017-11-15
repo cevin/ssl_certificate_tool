@@ -94,7 +94,7 @@ if __name__ == '__main__':
             ret['dns'] = exts['subjectAltName']
 
         ## parse key type and bits
-        ret['key_type'] = 'RSA' if pubkey.type() == crypto.TYPE_RSA else 'DSA'
+        ret['key_type'] = 'RSA' if pubkey.type() == crypto.TYPE_RSA else ('ECDSA' if pubkey.type() == 408 else 'DSA')
         ret['key_bits'] = pubkey.bits()
 
         print(json.dumps({"code":"success", "data":ret}))
