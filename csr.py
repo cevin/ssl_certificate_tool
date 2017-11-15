@@ -108,20 +108,24 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    csr = generate_csr(
-        domains=args.dns,
-        commonName=args.cn,
-        email=args.email,
-        countryName=args.country_name,
-        companyName=args.company_name,
-        unitName=args.unit_name,
-        provinceName=args.province_name,
-        cityName=args.city_name,
-        key_type=args.key_type,
-        key_size=args.key_size,
+    try:
+        csr = generate_csr(
+            domains=args.dns,
+            commonName=args.cn,
+            email=args.email,
+            countryName=args.country_name,
+            companyName=args.company_name,
+            unitName=args.unit_name,
+            provinceName=args.province_name,
+            cityName=args.city_name,
+            key_type=args.key_type,
+            key_size=args.key_size,
 
-        hash=args.hash
-    )
+            hash=args.hash
+        )
+    except Exception as e:
+        print(json.dumps({"code":"fail","message":e}))
+        sys.exit(1)
 
     print(json.dumps(csr))
     sys.exit(0)
