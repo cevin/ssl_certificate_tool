@@ -4,6 +4,7 @@ from OpenSSL import crypto
 import sys
 import json
 import argparse
+from cryptography.hazmat.backends.openssl.backend import serialization
 
 
 
@@ -96,6 +97,10 @@ if __name__ == '__main__':
         ## parse key type and bits
         ret['key_type'] = 'RSA' if pubkey.type() == crypto.TYPE_RSA else ('ECDSA' if pubkey.type() == 408 else 'DSA')
         ret['key_bits'] = pubkey.bits()
+        ret['pubkey'] = pubkey.to_cryptography_key().public_bytes(
+            encoding=serialization.Encoding.PEM,
+            format=serialization.PublicFormat.SubjectPublicKeyInfo
+        ).decode()
 
         print(json.dumps({"code":"success", "data":ret}))
     except CertTypeErrorException:
