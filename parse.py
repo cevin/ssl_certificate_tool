@@ -66,7 +66,7 @@ if __name__ == '__main__':
         try:
             req = crypto.load_certificate_request(crypto.FILETYPE_PEM, str)
         except ValueError:
-            raise CertTypeErrorException
+            raise CertTypeErrorException()
 
         subject = req.get_subject()
         pubkey = req.get_pubkey()
